@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  ace:
+    build:
+      context: .
+      dockerfile: Dockerfile.ace
+    container_name: ace-container
+    ports:
+      - "7600:7600"
+      - "7800:7800"
+    environment:
+      - ACE_SERVER_NAME=default
+    depends_on:
+      - mq
+    networks:
+      - ace-mq-network
+
+  mq:
+    build:
+      context: .
+      dockerfile: Dockerfile.mq
+    container_name: mq-container
+    ports:
+      - "1414:1414"
+      - "9443:9443"
+    environment:
+      - LICENSE=accept
+      - MQ_QMGR_NAME=QM1
+    networks:
+      - ace-mq-network
+
+networks:
+  ace-mq-network:
+    driver: bridge

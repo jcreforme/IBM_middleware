@@ -1,0 +1,9 @@
+# server.conf.yaml
+AceServer:
+  Name: default
+  Connectors:
+    MQConnector:
+      QueueManager: QM1
+      Hostname: mq-container
+      Port: 1414
+      Channel: DEV.ADMIN.SVRCONN

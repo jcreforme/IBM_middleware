@@ -1,0 +1,8 @@
+# Dockerfile for IBM MQ
+FROM ibmcom/mq:latest
+
+# Accept MQ license
+ENV LICENSE accept
+
+# Expose MQ ports
+EXPOSE 1414 9443

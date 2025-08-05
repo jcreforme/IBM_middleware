@@ -1,0 +1,12 @@
+# Dockerfile for IBM ACE
+FROM ibmcom/ace:latest
+
+# Copy integration server configuration
+COPY server.conf.yaml /home/aceuser/ace-server/
+
+# Set up ACE runtime
+USER aceuser
+RUN mqsicreateworkdir /home/aceuser/ace-server
+
+EXPOSE 7600 7800
+CMD ["IntegrationServer", "--work-dir", "/home/aceuser/ace-server"]
