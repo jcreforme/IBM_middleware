@@ -1,12 +1,19 @@
 # Dockerfile for IBM ACE
 FROM ibmcom/ace:latest
 
-# Copy integration server configuration
+# Copy integration server configuration as root
+USER root
 COPY server.conf.yaml /home/aceuser/ace-server/
 
-# Set up ACE runtime
-USER aceuser
-RUN mqsicreateworkdir /home/aceuser/ace-server
+# Set up ACE runtime and fix permissions
+RUN mkdir -p /home/aceuser/ace-server && \
+    chown -R aceuser:aceuser /home/aceuser/ace-server
 
+# Switch to aceuser
+USER aceuser
+
+# Expose ports
 EXPOSE 7600 7800
+
+# Start the integration server
 CMD ["IntegrationServer", "--work-dir", "/home/aceuser/ace-server"]

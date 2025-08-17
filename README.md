@@ -48,6 +48,20 @@ To stop and remove the containers, run:
 docker-compose down
 ```
 
+## using another mq-container-name
+```bash
+docker run -d \
+  --name mq-container-new \
+  -e LICENSE=accept \
+  -e MQ_QMGR_NAME=QM2 \
+  -p 1415:1414 \
+  -p 9444:9443 \
+  ibmcom/mq:latest
+```
+
 ## License
 Ensure you accept the IBM license agreements for both ACE and MQ before using this setup.
+
+## Author
+Juan Carlo Reforme Sueyoshi
 
