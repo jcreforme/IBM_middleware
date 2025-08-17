@@ -31,11 +31,12 @@ docker-compose up
 ```
 ## Diagram
 flowchart LR
-    subgraph Docker Network [ace-mq-network]
+    subgraph ace-mq-network
         ACE[IBM ACE v12 Container]
         MQ[IBM MQ v9.4.0.11 Container]
+        Kafka[Apache Kafka Container]
+        ZK[Zookeeper]
         DB[(ODBC/JDBC Database)]
-        Kafka[(Apache Kafka)]
         SFTP[(SFTP Server)]
     end
 
@@ -46,7 +47,14 @@ flowchart LR
     ACE --> SFTP
     MQ --> ACE
     Kafka --> ACE
+    Kafka --> ZK
 
+🧩 Kafka Integration
+🔹 KafkaInput/KafkaOutput nodes in ACE allow real-time streaming integration.
+🔹 Kafka is orchestrated with Zookeeper and exposed on port 9092.
+🔹 ACE connects to Kafka internally via PLAINTEXT://kafka:9092.
+
+Topics, partitions, and consumer groups can be managed via CLI or ACE configuration.
 
 ## Verify that both ACE and MQ are running:
 - ACE: Accessible on ports 7600 and 7800.
@@ -121,3 +129,13 @@ Ensure you accept the IBM license agreements for both ACE and MQ before using th
 Juan Carlo Reforme Sueyoshi
 Specializing in secure, scalable integrations with WordPress, REST APIs, and enterprise middleware.
 
+
+## FI Docker Compose version v1.29.2, build 5becea4c
+command: docker-compose *
+
+## IF Docker compose V2.39.*
+command: docker compose *
+
+
+## using verbose on the start
+docker-compose --verbose up --build --force-recreate
