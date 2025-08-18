@@ -1,0 +1,21 @@
+server:
+  name: default
+  connectors:
+    mq:
+      queueManager: QM1
+      connection:
+        host: mq-container
+        port: 1414
+        channel: DEV.ADMIN.SVRCONN
+      security:
+        username: mqadmin
+        password: mqpassword  
+  RestApi:
+    port: 7800
+  Logging:
+    console:
+      logLevel: info
+    file:
+      enabled: true
+      directory: /home/aceuser/ace-server/log
+      logLevel: info  

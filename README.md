@@ -139,3 +139,18 @@ command: docker compose *
 
 ## using verbose on the start
 docker-compose --verbose up --build --force-recreate
+
+
+## Check if ACE is running properly
+- docker exec -it ace-container bash
+- source /opt/ibm/ace-11/server/bin/mqsiprofile
+- mqsilist
+
+## Check MyApp exists
+[aceuser@96bbbbd9d554 ~]$ ls -l /home/aceuser/ace-server/run/
+total 4
+drwxrwx--- 3 aceuser aceuser 4096 Aug 18 00:00 MyIntegrationApp
+
+## Test MyApp is runing
+curl -X POST http://localhost:7800/myFlow -d '{"key":"value"}' -H "Content-Type: application/json"
+{"message":"Hello from ESQL!"}juans-MacBook-Pro:IBM_middleware jcarlo$ 

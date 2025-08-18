@@ -1,15 +1,22 @@
+version: '3.8'
+
 services:
   ace:
     build:
       context: .
       dockerfile: Dockerfile.ace
     container_name: ace-container
+    image: ibmcom/ace:latest
     ports:
       - "7600:7600"
       - "7800:7800"
+    volumes:
+      - /Users/jcarlo/IBM/ACET12/workspace/GeneratedBarFiles:/home/aceuser/ace-server-data/bars
+      - ./config/server.conf.yaml:/home/aceuser/ace-server-data/configuration/server.conf.yaml
     environment:
       ACE_SERVER_NAME: default
       LICENSE: accept
+      ACE_DEBUG: "true"
     depends_on:
       mq:
         condition: service_started
@@ -52,13 +59,28 @@ services:
       KAFKA_PROCESS_ROLES: broker
       KAFKA_NODE_ID: 1
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT://kafka:9092
       KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      CLUSTER_ID: MkafkaCluster1234567890   # ✅ Required
+      CLUSTER_ID: MkafkaCluster1234567890
     ports:
       - "9092:9092"
+    networks:
+      - ace-mq-network
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    ports:
+      - "8080:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local-kafka
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: localhost:9092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: localhost:2181
+    depends_on:
+      - kafka
+      - zookeeper
     networks:
       - ace-mq-network
 

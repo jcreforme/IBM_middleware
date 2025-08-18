@@ -1,4 +1,4 @@
-# Dockerfile for IBM ACE
+# Dockerfile for IBM ACE with MQ integration
 FROM ibmcom/ace:latest
 
 # Copy integration server configuration as root
@@ -9,11 +9,18 @@ COPY server.conf.yaml /home/aceuser/ace-server/
 RUN mkdir -p /home/aceuser/ace-server && \
     chown -R aceuser:aceuser /home/aceuser/ace-server
 
+# Optional: Copy BAR files or other resources
+# Uncomment the following line if you want to deploy BAR files during build
+# COPY myFlow.bar /home/aceuser/ace-server/run/
+
 # Switch to aceuser
 USER aceuser
 
-# Expose ports
-EXPOSE 7600 7800
+# Set up ACE environment
+RUN echo "source /opt/ibm/ace-11/server/bin/mqsiprofile" >> /home/aceuser/.bashrc
+
+# Expose ports for HTTP and MQ
+EXPOSE 7600 7800 1414
 
 # Start the integration server
 CMD ["IntegrationServer", "--work-dir", "/home/aceuser/ace-server"]
