@@ -19,3 +19,10 @@ server:
       enabled: true
       directory: /home/aceuser/ace-server/log
       logLevel: info  
+  JDBCProviders:
+  MySQLProvider:
+    databaseName: mydb
+    type4DriverClassName: com.mysql.cj.jdbc.Driver
+    connectionUrlFormat: jdbc:mysql://mysql-db:3306/mydb
+    jarsURL: /home/aceuser/ace-server-data/shared-classes/mysql-connector-j-9.4.0.jar
+    

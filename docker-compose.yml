@@ -1,4 +1,3 @@
-version: '3.8'
 
 services:
   ace:
@@ -13,6 +12,7 @@ services:
     volumes:
       - /Users/jcarlo/IBM/ACET12/workspace/GeneratedBarFiles:/home/aceuser/ace-server-data/bars
       - ./config/server.conf.yaml:/home/aceuser/ace-server-data/configuration/server.conf.yaml
+      - ./drivers/mysql-connector-j-9.4.0/mysql-connector-j-9.4.0.jar:/home/aceuser/ace-server-data/shared-classes/mysql-connector-j-9.4.0.jar
     environment:
       ACE_SERVER_NAME: default
       LICENSE: accept
@@ -22,6 +22,8 @@ services:
         condition: service_started
       kafka:
         condition: service_started
+      mysql:
+        condition: service_healthy
     networks:
       - ace-mq-network
 
@@ -83,6 +85,29 @@ services:
       - zookeeper
     networks:
       - ace-mq-network
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: aceuser
+      MYSQL_PASSWORD: acepass
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ace-mq-network
+
+volumes:
+  mysql-data:
 
 networks:
   ace-mq-network:

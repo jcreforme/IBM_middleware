@@ -110,7 +110,7 @@ docker run -d \
 ```
 
 ## Purpose of the Project
-🔹 Design and develop integration flows using IBM ACE v12 (ESQL and Java).
+🔹 Design and develop integration flows using IBM ACE v12 (ESQL and Java). DONE
 🔹 Configure connections to external systems via ODBC, JDBC, Kafka, and SFTP.
 🔹 Deploy and manage flows in development and production environments using CLI (mqsi) and web console.*
 🔹 Administer messaging platforms such as IBM MQ (v9.4.0.11) and Kafka (topics, partitions, consumers).
@@ -154,3 +154,48 @@ drwxrwx--- 3 aceuser aceuser 4096 Aug 18 00:00 MyIntegrationApp
 ## Test MyApp is runing
 curl -X POST http://localhost:7800/myFlow -d '{"key":"value"}' -H "Content-Type: application/json"
 {"message":"Hello from ESQL!"}juans-MacBook-Pro:IBM_middleware jcarlo$ 
+
+
+
+## for local environment
+- install mysql connector locally:
+brew install mysql-connector-c++ --verbose
+brew install unixodbc --verbose 
+brew install mysql-client --verbose 
+
+brew list mysql-client
+
+
+
+
+/Users/jcarlo/IBM/ACET12/workspace/MySQLPolicy
+
+"/Applications/IBM App Connect Enterprise.app/Contents/mqsi/server/lib/mysql-connector-j-9.4.0.jar"
+
+
+IntegrationServer   --work-dir /Users/jcarlo/IBM/ACET12/workspace/TEST_SERVER/   --lib "/Applications/IBM App Connect Enterprise.app/Contents/mqsi/server/lib/mysql-connector-j-9.4.0.jar"
+
+cp mysql-connector-java-8.x.x.jar "/Applications/IBM App Connect Enterprise.app/Contents/mqsi/server/jdbcConnector/"
+
+
+
+
+IntegrationServer --work-dir /Users/jcarlo/IBM/ACET12/workspace/TEST_SERVER/ --lib "/Applications/IBM App Connect Enterprise.app/Contents/mqsi/server/lib/mysql-connector-j-9.4.0.jar"
+
+
+mqsicreatebar -data /Users/jcarlo/IBM/ACET12/workspace -b MyFlow.bar -a MyIntegrationApp -p MySQLPolicy -o /Users/jcarlo/Desktop/barfiles
+
+
+mqsicreateconfigurableservice MYNODE -c JDBCProviders -o MySQLPolicy \
+-n connectionUrl,driverClassName,user,password \
+-v "jdbc:mysql://localhost:3306/test1","com.mysql.cj.jdbc.Driver","root","root"
+
+
+
+mqsideploy -e test -a /Users/jcarlo/IBM/ACET12/workspace/GeneratedBarFiles/MyIntegrationAppproject.generated.bar
+
+
+iconv -f us-ascii -t utf-8 /Users/jcarlo/IBM/ACET12/workspace/TEST_SERVER/config/policies/JDBCProviders/MySQLPolicy.policyxml \
+
+
+mqsibar -c -w /Users/jcarlo/IBM/ACET12/workspace -a MySQLPolicyproject.generated.bar -s TEST_SERVER

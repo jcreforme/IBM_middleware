@@ -1,0 +1,330 @@
+[ODBC][822][1755554791.688178][__handles.c][493]
+		Exit:[SQL_SUCCESS]
+			Environment = 0x7fa7fa815200
+[ODBC][822][1755554791.688753][SQLAllocHandle.c][469]
+		Entry:
+			Handle Type = 2
+			Input Handle = 0x7fa7fa815200
+[ODBC][822][1755554791.693885][SQLAllocHandle.c][585]
+		Exit:[SQL_SUCCESS]
+			Output Handle = 0x7fa7fb808200
+[ODBC][822][1755554791.694012][SQLConnect.c][4012]
+		Entry:
+			Connection = 0x7fa7fb808200
+			Server Name = [MySQLDSN][length = 8 (SQL_NTS)]
+			User Name = [NULL]
+			Authentication = [NULL]
+		Threading Level set from Driver Entry in ODBCINST.INI 99 from '99'
+
+		Threading Level set from [ODBC] Section in ODBCINST.INI 0 from '0'
+
+		UNICODE Using encoding ASCII 'UTF-8' and UNICODE 'UCS-2-INTERNAL'
+
+[ODBC][822][1755554791.718189][SQLConnect.c][1432]Error: IM004
+[ODBC][822][1755554791.718590][SQLError.c][428]
+		Entry:
+			Connection = 0x7fa7fb808200
+			SQLState = 0x7ffeecca8356
+			Native = 0x7ffeecca8350
+			Message Text = 0x7ffeecca8360
+			Buffer Length = 500
+			Text Len Ptr = 0x7ffeecca8354
+[ODBC][822][1755554791.718826][SQLError.c][486]
+		Exit:[SQL_SUCCESS]
+			SQLState = IM004
+			Native = 0x7ffeecca8350 -> 0 (32 bits)
+			Message Text = [[unixODBC][Driver Manager]Driver's SQLAllocHandle on SQL_HANDLE_HENV failed]
+[ODBC][822][1755554791.719098][SQLError.c][428]
+		Entry:
+			Connection = 0x7fa7fb808200
+			SQLState = 0x7ffeecca8356
+			Native = 0x7ffeecca8350
+			Message Text = 0x7ffeecca8360
+			Buffer Length = 500
+			Text Len Ptr = 0x7ffeecca8354
+[ODBC][822][1755554791.719296][SQLError.c][486]
+		Exit:[SQL_NO_DATA]
+[ODBC][822][1755554791.719505][SQLError.c][428]
+		Entry:
+			Environment = 0x7fa7fa815200
+			SQLState = 0x7ffeecca8356
+			Native = 0x7ffeecca8350
+			Message Text = 0x7ffeecca8360
+			Buffer Length = 500
+			Text Len Ptr = 0x7ffeecca8354
+[ODBC][822][1755554791.719675][SQLError.c][486]
+		Exit:[SQL_NO_DATA]
+[ODBC][822][1755554791.719959][SQLFreeHandle.c][324]
+		Entry:
+			Handle Type = 2
+			Input Handle = 0x7fa7fb808200
+[ODBC][822][1755554791.720428][SQLFreeHandle.c][373]
+		Exit:[SQL_SUCCESS]
+[ODBC][822][1755554791.720631][SQLFreeHandle.c][225]
+		Entry:
+			Handle Type = 1
+			Input Handle = 0x7fa7fa815200
+[ODBC][873][1755554846.690381][__handles.c][493]
+		Exit:[SQL_SUCCESS]
+			Environment = 0x7fed92815200
+[ODBC][873][1755554846.690848][SQLAllocHandle.c][469]
+		Entry:
+			Handle Type = 2
+			Input Handle = 0x7fed92815200
+[ODBC][873][1755554846.691393][SQLAllocHandle.c][585]
+		Exit:[SQL_SUCCESS]
+			Output Handle = 0x7fed93009200
+[ODBC][873][1755554846.691797][SQLConnect.c][4012]
+		Entry:
+			Connection = 0x7fed93009200
+			Server Name = [MySQLDSN][length = 8 (SQL_NTS)]
+			User Name = [NULL]
+			Authentication = [NULL]
+		Threading Level set from Driver Entry in ODBCINST.INI 99 from '99'
+
+		Threading Level set from [ODBC] Section in ODBCINST.INI 0 from '0'
+
+		UNICODE Using encoding ASCII 'UTF-8' and UNICODE 'UCS-2-INTERNAL'
+
+[ODBC][873][1755554846.718371][SQLConnect.c][1432]Error: IM004
+[ODBC][873][1755554846.718674][SQLError.c][428]
+		Entry:
+			Connection = 0x7fed93009200
+			SQLState = 0x7ffee7799356
+			Native = 0x7ffee7799350
+			Message Text = 0x7ffee7799360
+			Buffer Length = 500
+			Text Len Ptr = 0x7ffee7799354
+[ODBC][873][1755554846.718915][SQLError.c][486]
+		Exit:[SQL_SUCCESS]
+			SQLState = IM004
+			Native = 0x7ffee7799350 -> 0 (32 bits)
+			Message Text = [[unixODBC][Driver Manager]Driver's SQLAllocHandle on SQL_HANDLE_HENV failed]
+[ODBC][873][1755554846.719155][SQLError.c][428]
+		Entry:
+			Connection = 0x7fed93009200
+			SQLState = 0x7ffee7799356
+			Native = 0x7ffee7799350
+			Message Text = 0x7ffee7799360
+			Buffer Length = 500
+			Text Len Ptr = 0x7ffee7799354
+[ODBC][873][1755554846.719287][SQLError.c][486]
+		Exit:[SQL_NO_DATA]
+[ODBC][873][1755554846.719439][SQLError.c][428]
+		Entry:
+			Environment = 0x7fed92815200
+			SQLState = 0x7ffee7799356
+			Native = 0x7ffee7799350
+			Message Text = 0x7ffee7799360
+			Buffer Length = 500
+			Text Len Ptr = 0x7ffee7799354
+[ODBC][873][1755554846.719615][SQLError.c][486]
+		Exit:[SQL_NO_DATA]
+[ODBC][873][1755554846.719874][SQLFreeHandle.c][324]
+		Entry:
+			Handle Type = 2
+			Input Handle = 0x7fed93009200
+[ODBC][873][1755554846.720174][SQLFreeHandle.c][373]
+		Exit:[SQL_SUCCESS]
+[ODBC][873][1755554846.720307][SQLFreeHandle.c][225]
+		Entry:
+			Handle Type = 1
+			Input Handle = 0x7fed92815200
+[ODBC][1057][1755555004.625354][__handles.c][493]
+		Exit:[SQL_SUCCESS]
+			Environment = 0x7f8e8e815200
+[ODBC][1057][1755555004.625534][SQLAllocHandle.c][469]
+		Entry:
+			Handle Type = 2
+			Input Handle = 0x7f8e8e815200
+[ODBC][1057][1755555004.630873][SQLAllocHandle.c][585]
+		Exit:[SQL_SUCCESS]
+			Output Handle = 0x7f8e8f008200
+[ODBC][1057][1755555004.631101][SQLConnect.c][4012]
+		Entry:
+			Connection = 0x7f8e8f008200
+			Server Name = [MySQLDSN][length = 8 (SQL_NTS)]
+			User Name = [NULL]
+			Authentication = [NULL]
+		Threading Level set from Driver Entry in ODBCINST.INI 99 from '99'
+
+		Threading Level set from [ODBC] Section in ODBCINST.INI 0 from '0'
+
+		UNICODE Using encoding ASCII 'UTF-8' and UNICODE 'UCS-2-INTERNAL'
+
+[ODBC][1057][1755555004.655444][SQLConnect.c][1432]Error: IM004
+[ODBC][1057][1755555004.655769][SQLError.c][428]
+		Entry:
+			Connection = 0x7f8e8f008200
+			SQLState = 0x7ffee9d84356
+			Native = 0x7ffee9d84350
+			Message Text = 0x7ffee9d84360
+			Buffer Length = 500
+			Text Len Ptr = 0x7ffee9d84354
+[ODBC][1057][1755555004.655965][SQLError.c][486]
+		Exit:[SQL_SUCCESS]
+			SQLState = IM004
+			Native = 0x7ffee9d84350 -> 0 (32 bits)
+			Message Text = [[unixODBC][Driver Manager]Driver's SQLAllocHandle on SQL_HANDLE_HENV failed]
+[ODBC][1057][1755555004.656265][SQLError.c][428]
+		Entry:
+			Connection = 0x7f8e8f008200
+			SQLState = 0x7ffee9d84356
+			Native = 0x7ffee9d84350
+			Message Text = 0x7ffee9d84360
+			Buffer Length = 500
+			Text Len Ptr = 0x7ffee9d84354
+[ODBC][1057][1755555004.656434][SQLError.c][486]
+		Exit:[SQL_NO_DATA]
+[ODBC][1057][1755555004.656608][SQLError.c][428]
+		Entry:
+			Environment = 0x7f8e8e815200
+			SQLState = 0x7ffee9d84356
+			Native = 0x7ffee9d84350
+			Message Text = 0x7ffee9d84360
+			Buffer Length = 500
+			Text Len Ptr = 0x7ffee9d84354
+[ODBC][1057][1755555004.656786][SQLError.c][486]
+		Exit:[SQL_NO_DATA]
+[ODBC][1057][1755555004.656979][SQLFreeHandle.c][324]
+		Entry:
+			Handle Type = 2
+			Input Handle = 0x7f8e8f008200
+[ODBC][1057][1755555004.657172][SQLFreeHandle.c][373]
+		Exit:[SQL_SUCCESS]
+[ODBC][1057][1755555004.657302][SQLFreeHandle.c][225]
+		Entry:
+			Handle Type = 1
+			Input Handle = 0x7f8e8e815200
+[ODBC][2835][1755556886.200960][__handles.c][493]
+		Exit:[SQL_SUCCESS]
+			Environment = 0x7fb34380d000
+[ODBC][2835][1755556886.201638][SQLAllocHandle.c][469]
+		Entry:
+			Handle Type = 2
+			Input Handle = 0x7fb34380d000
+[ODBC][2835][1755556886.202020][SQLAllocHandle.c][585]
+		Exit:[SQL_SUCCESS]
+			Output Handle = 0x7fb342809800
+[ODBC][2835][1755556886.202211][SQLConnect.c][4012]
+		Entry:
+			Connection = 0x7fb342809800
+			Server Name = [MyMAMP][length = 6 (SQL_NTS)]
+			User Name = [NULL]
+			Authentication = [NULL]
+		Threading Level set from Driver Entry in ODBCINST.INI 99 from '99'
+
+		Threading Level set from [ODBC] Section in ODBCINST.INI 0 from '0'
+
+		UNICODE Using encoding ASCII 'UTF-8' and UNICODE 'UCS-2-INTERNAL'
+
+[ODBC][2835][1755556886.242520][SQLConnect.c][1190]Can't open lib '/usr/local/mysql-connector-odbc-8.0.24-macos11-x86-64bit/lib/libmyodbc8w.so' : file not found
+[ODBC][2835][1755556886.242808][SQLError.c][428]
+		Entry:
+			Connection = 0x7fb342809800
+			SQLState = 0x7ffee3b73366
+			Native = 0x7ffee3b73360
+			Message Text = 0x7ffee3b73370
+			Buffer Length = 500
+			Text Len Ptr = 0x7ffee3b73364
+[ODBC][2835][1755556886.242942][SQLError.c][486]
+		Exit:[SQL_SUCCESS]
+			SQLState = 01000
+			Native = 0x7ffee3b73360 -> 0 (32 bits)
+			Message Text = [[unixODBC][Driver Manager]Can't open lib '/usr/local/mysql-connector-odbc-8.0.24-macos11-x86-64bit/lib/libmyodbc8w.so' : file no]
+[ODBC][2835][1755556886.244162][SQLError.c][428]
+		Entry:
+			Connection = 0x7fb342809800
+			SQLState = 0x7ffee3b73366
+			Native = 0x7ffee3b73360
+			Message Text = 0x7ffee3b73370
+			Buffer Length = 500
+			Text Len Ptr = 0x7ffee3b73364
+[ODBC][2835][1755556886.244322][SQLError.c][486]
+		Exit:[SQL_NO_DATA]
+[ODBC][2835][1755556886.244454][SQLError.c][428]
+		Entry:
+			Environment = 0x7fb34380d000
+			SQLState = 0x7ffee3b73366
+			Native = 0x7ffee3b73360
+			Message Text = 0x7ffee3b73370
+			Buffer Length = 500
+			Text Len Ptr = 0x7ffee3b73364
+[ODBC][2835][1755556886.244693][SQLError.c][486]
+		Exit:[SQL_NO_DATA]
+[ODBC][2835][1755556886.244871][SQLFreeHandle.c][324]
+		Entry:
+			Handle Type = 2
+			Input Handle = 0x7fb342809800
+[ODBC][2835][1755556886.245042][SQLFreeHandle.c][373]
+		Exit:[SQL_SUCCESS]
+[ODBC][2835][1755556886.245167][SQLFreeHandle.c][225]
+		Entry:
+			Handle Type = 1
+			Input Handle = 0x7fb34380d000
+[ODBC][2903][1755556934.373651][__handles.c][493]
+		Exit:[SQL_SUCCESS]
+			Environment = 0x7fd5c1815200
+[ODBC][2903][1755556934.373969][SQLAllocHandle.c][469]
+		Entry:
+			Handle Type = 2
+			Input Handle = 0x7fd5c1815200
+[ODBC][2903][1755556934.374190][SQLAllocHandle.c][585]
+		Exit:[SQL_SUCCESS]
+			Output Handle = 0x7fd5c2009200
+[ODBC][2903][1755556934.374374][SQLConnect.c][4012]
+		Entry:
+			Connection = 0x7fd5c2009200
+			Server Name = [MyMAMP][length = 6 (SQL_NTS)]
+			User Name = [NULL]
+			Authentication = [NULL]
+		Threading Level set from Driver Entry in ODBCINST.INI 99 from '99'
+
+		Threading Level set from [ODBC] Section in ODBCINST.INI 0 from '0'
+
+		UNICODE Using encoding ASCII 'UTF-8' and UNICODE 'UCS-2-INTERNAL'
+
+[ODBC][2903][1755556934.383173][SQLConnect.c][1190]Can't open lib '/usr/local/mysql-connector-odbc-8.0.24-macos11-x86-64bit/lib/libmyodbc8w.so' : file not found
+[ODBC][2903][1755556934.383668][SQLError.c][428]
+		Entry:
+			Connection = 0x7fd5c2009200
+			SQLState = 0x7ffeec6877f6
+			Native = 0x7ffeec6877f0
+			Message Text = 0x7ffeec687800
+			Buffer Length = 500
+			Text Len Ptr = 0x7ffeec6877f4
+[ODBC][2903][1755556934.383933][SQLError.c][486]
+		Exit:[SQL_SUCCESS]
+			SQLState = 01000
+			Native = 0x7ffeec6877f0 -> 0 (32 bits)
+			Message Text = [[unixODBC][Driver Manager]Can't open lib '/usr/local/mysql-connector-odbc-8.0.24-macos11-x86-64bit/lib/libmyodbc8w.so' : file no]
+[ODBC][2903][1755556934.384419][SQLError.c][428]
+		Entry:
+			Connection = 0x7fd5c2009200
+			SQLState = 0x7ffeec6877f6
+			Native = 0x7ffeec6877f0
+			Message Text = 0x7ffeec687800
+			Buffer Length = 500
+			Text Len Ptr = 0x7ffeec6877f4
+[ODBC][2903][1755556934.384694][SQLError.c][486]
+		Exit:[SQL_NO_DATA]
+[ODBC][2903][1755556934.384883][SQLError.c][428]
+		Entry:
+			Environment = 0x7fd5c1815200
+			SQLState = 0x7ffeec6877f6
+			Native = 0x7ffeec6877f0
+			Message Text = 0x7ffeec687800
+			Buffer Length = 500
+			Text Len Ptr = 0x7ffeec6877f4
+[ODBC][2903][1755556934.385050][SQLError.c][486]
+		Exit:[SQL_NO_DATA]
+[ODBC][2903][1755556934.385269][SQLFreeHandle.c][324]
+		Entry:
+			Handle Type = 2
+			Input Handle = 0x7fd5c2009200
+[ODBC][2903][1755556934.385495][SQLFreeHandle.c][373]
+		Exit:[SQL_SUCCESS]
+[ODBC][2903][1755556934.385667][SQLFreeHandle.c][225]
+		Entry:
+			Handle Type = 1
+			Input Handle = 0x7fd5c1815200

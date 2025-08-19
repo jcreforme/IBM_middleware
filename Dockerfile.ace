@@ -1,17 +1,26 @@
-# Dockerfile for IBM ACE with MQ integration
+# Dockerfile for IBM ACE with MQ and MySQL JDBC integration
 FROM ibmcom/ace:latest
 
-# Copy integration server configuration as root
+# Copy JDBC driver and policy file as root
 USER root
-COPY server.conf.yaml /home/aceuser/ace-server/
+
+# Optional: Copy server.conf.yaml if needed
+# COPY ./config/server.conf.yaml /home/aceuser/ace-server/configuration/server.conf.yaml
+
+# Copy MySQL JDBC driver
+COPY ./drivers/mysql-connector-j-9.4.0/mysql-connector-j-9.4.0.jar \
+     /home/aceuser/ace-server/shared-classes/mysql-connector-j-9.4.0.jar
+
+# Copy JDBC policy file directly into runtime configuration
+COPY ./policies/JDBCProviders/MySQLPolicy.policyxml \
+     /home/aceuser/ace-server/configuration/policies/JDBCProviders/MySQLPolicy.policyxml
 
 # Set up ACE runtime and fix permissions
-RUN mkdir -p /home/aceuser/ace-server && \
+RUN mkdir -p /home/aceuser/ace-server/configuration/policies/JDBCProviders && \
     chown -R aceuser:aceuser /home/aceuser/ace-server
 
-# Optional: Copy BAR files or other resources
-# Uncomment the following line if you want to deploy BAR files during build
-# COPY myFlow.bar /home/aceuser/ace-server/run/
+# Optional: Copy BAR files for deployment
+# COPY ./bars/myFlow.bar /home/aceuser/ace-server/run/
 
 # Switch to aceuser
 USER aceuser
@@ -23,4 +32,4 @@ RUN echo "source /opt/ibm/ace-11/server/bin/mqsiprofile" >> /home/aceuser/.bashr
 EXPOSE 7600 7800 1414
 
 # Start the integration server
-CMD ["IntegrationServer", "--work-dir", "/home/aceuser/ace-server"]
+CMD ["/home/aceuser/ace-server/IntegrationServer"]
