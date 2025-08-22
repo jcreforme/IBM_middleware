@@ -142,7 +142,7 @@ docker-compose --verbose up --build --force-recreate
 
 
 ## Check if ACE is running properly
-- docker exec -it ace-container bash
+- docker exec -u 0 -it ace-container bash
 - source /opt/ibm/ace-11/server/bin/mqsiprofile
 - mqsilist
 
@@ -167,35 +167,41 @@ brew list mysql-client
 
 
 
+docker cp odbc.ini ace-container:/etc/odbc.ini
 
-/Users/jcarlo/IBM/ACET12/workspace/MySQLPolicy
+docker cp mysql-connector-odbc-9.4.0-linux-glibc2.28-x86-64bit/lib/libmyodbc9a.so ace-container:/tmp/mysql-connector-odbc-9.4.0-linux-glibc2.28-x86-64bit/lib/
 
-"/Applications/IBM App Connect Enterprise.app/Contents/mqsi/server/lib/mysql-connector-j-9.4.0.jar"
+cat /etc/os-release
 
-
-IntegrationServer   --work-dir /Users/jcarlo/IBM/ACET12/workspace/TEST_SERVER/   --lib "/Applications/IBM App Connect Enterprise.app/Contents/mqsi/server/lib/mysql-connector-j-9.4.0.jar"
-
-cp mysql-connector-java-8.x.x.jar "/Applications/IBM App Connect Enterprise.app/Contents/mqsi/server/jdbcConnector/"
+https://www.ibm.com/resources/mrs/assets/DownloadList?source=swg-wmbfd&lang=en_US
 
 
+docker stop ace-container
+docker rm -f ace-container
 
+Rebuild the Docker image:
+docker build -t ace-container -f Dockerfile.ace .
 
-IntegrationServer --work-dir /Users/jcarlo/IBM/ACET12/workspace/TEST_SERVER/ --lib "/Applications/IBM App Connect Enterprise.app/Contents/mqsi/server/lib/mysql-connector-j-9.4.0.jar"
+Run the container:
+docker run --name ace-container -d ace-container
+docker run --name ace-container -u aceuser -d ace-container
 
-
-mqsicreatebar -data /Users/jcarlo/IBM/ACET12/workspace -b MyFlow.bar -a MyIntegrationApp -p MySQLPolicy -o /Users/jcarlo/Desktop/barfiles
-
-
-mqsicreateconfigurableservice MYNODE -c JDBCProviders -o MySQLPolicy \
--n connectionUrl,driverClassName,user,password \
--v "jdbc:mysql://localhost:3306/test1","com.mysql.cj.jdbc.Driver","root","root"
+docker exec -u 0 -it ace-container bash
 
 
 
-mqsideploy -e test -a /Users/jcarlo/IBM/ACET12/workspace/GeneratedBarFiles/MyIntegrationAppproject.generated.bar
-
-
-iconv -f us-ascii -t utf-8 /Users/jcarlo/IBM/ACET12/workspace/TEST_SERVER/config/policies/JDBCProviders/MySQLPolicy.policyxml \
-
-
-mqsibar -c -w /Users/jcarlo/IBM/ACET12/workspace -a MySQLPolicyproject.generated.bar -s TEST_SERVER
+/home/aceuser/ace-server/
+├── bars/                          # BAR files to deploy
+│   ├── MyBar.bar
+│   └── MyIntegrationApp.bar
+│
+├── configuration/                # ACE runtime configuration
+│   ├── policies/
+│   │   └── JDBCProviders/
+│   │       └── MySQLPolicy.policyxml
+│   └── odbc.ini                  # Optional: override system-wide ODBC config
+│
+├── shared-classes/              # JDBC drivers and shared libraries
+│   └── mysql-connector-j-9.4.0.jar
+│
+└── server.conf.yaml             # ACE server configuration

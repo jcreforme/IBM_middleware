@@ -5,27 +5,24 @@ services:
       context: .
       dockerfile: Dockerfile.ace
     container_name: ace-container
-    image: ibmcom/ace:latest
     ports:
       - "7600:7600"
       - "7800:7800"
     volumes:
-      - /Users/jcarlo/IBM/ACET12/workspace/GeneratedBarFiles:/home/aceuser/ace-server-data/bars
-      - ./config/server.conf.yaml:/home/aceuser/ace-server-data/configuration/server.conf.yaml
-      - ./drivers/mysql-connector-j-9.4.0/mysql-connector-j-9.4.0.jar:/home/aceuser/ace-server-data/shared-classes/mysql-connector-j-9.4.0.jar
+      - /Users/jcarlo/IBM/ACET12/workspace/GeneratedBarFiles:/home/aceuser/ace-server/bars
+      - ./config/server.conf.yaml:/home/aceuser/ace-server/server.conf.yaml
+      - ./drivers/mysql-connector-j-9.4.0/mysql-connector-j-9.4.0.jar:/home/aceuser/ace-server/shared-classes/mysql-connector-j-9.4.0.jar
     environment:
       ACE_SERVER_NAME: default
       LICENSE: accept
       ACE_DEBUG: "true"
     depends_on:
-      mq:
-        condition: service_started
-      kafka:
-        condition: service_started
-      mysql:
-        condition: service_healthy
+      - mq
+      - kafka
+      - mysql
     networks:
       - ace-mq-network
+    restart: unless-stopped
 
   mq:
     build:
@@ -40,6 +37,7 @@ services:
       MQ_QMGR_NAME: QM1
     networks:
       - ace-mq-network
+    restart: unless-stopped
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -50,13 +48,18 @@ services:
       - "2181:2181"
     networks:
       - ace-mq-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "echo", "ruok", "|", "nc", "localhost", "2181"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   kafka:
     image: confluentinc/cp-kafka:latest
     container_name: kafka
     depends_on:
-      zookeeper:
-        condition: service_started
+      - zookeeper
     environment:
       KAFKA_PROCESS_ROLES: broker
       KAFKA_NODE_ID: 1
@@ -70,6 +73,7 @@ services:
       - "9092:9092"
     networks:
       - ace-mq-network
+    restart: unless-stopped
 
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
@@ -78,13 +82,14 @@ services:
       - "8080:8080"
     environment:
       KAFKA_CLUSTERS_0_NAME: local-kafka
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: localhost:9092
-      KAFKA_CLUSTERS_0_ZOOKEEPER: localhost:2181
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
     depends_on:
       - kafka
       - zookeeper
     networks:
       - ace-mq-network
+    restart: unless-stopped
 
   mysql:
     image: mysql:latest
@@ -98,13 +103,30 @@ services:
       MYSQL_PASSWORD: acepass
     volumes:
       - mysql-data:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
     networks:
       - ace-mq-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql-db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root
+    depends_on:
+      - mysql
+    networks:
+      - ace-mq-network
+    restart: unless-stopped
 
 volumes:
   mysql-data:

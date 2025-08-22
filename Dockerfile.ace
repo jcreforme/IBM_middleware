@@ -1,35 +1,80 @@
-# Dockerfile for IBM ACE with MQ and MySQL JDBC integration
-FROM ibmcom/ace:latest
+# === Base: SLES15 with ACE ===
+FROM registry.suse.com/bci/bci-base:15.4
 
-# Copy JDBC driver and policy file as root
+# === Runtime Configuration ===
 USER root
 
-# Optional: Copy server.conf.yaml if needed
-# COPY ./config/server.conf.yaml /home/aceuser/ace-server/configuration/server.conf.yaml
+RUN echo "Installing zypper and basic utilities" && \
+    zypper --non-interactive install zypper coreutils
 
-# Copy MySQL JDBC driver
-COPY ./drivers/mysql-connector-j-9.4.0/mysql-connector-j-9.4.0.jar \
-     /home/aceuser/ace-server/shared-classes/mysql-connector-j-9.4.0.jar
+# Install required packages with GPG checks disabled
+RUN echo "Installing required packages..." && \
+    zypper clean --all && \
+    zypper --no-gpg-checks --non-interactive refresh && \
+    zypper --no-gpg-checks --non-interactive install \
+        --force-resolution \
+        gzip \
+        tar \
+        libX11-6 \
+        libXext6 \
+        libXrender1 \
+        libXtst6 \
+        libXi6 \
+        unixODBC \
+        gawk && \
+    zypper clean
 
-# Copy JDBC policy file directly into runtime configuration
-COPY ./policies/JDBCProviders/MySQLPolicy.policyxml \
-     /home/aceuser/ace-server/configuration/policies/JDBCProviders/MySQLPolicy.policyxml
+# === ACE Installation ===
+COPY 12.0.12.16-ACE-LINUX64-DEVELOPER.tar.gz /tmp/
+RUN chmod +r /tmp/12.0.12.16-ACE-LINUX64-DEVELOPER.tar.gz && \
+    tar -xzf /tmp/12.0.12.16-ACE-LINUX64-DEVELOPER.tar.gz -C /tmp && \
+    cd /tmp/ace-12.0.12.16 && \
+    ./ace make registry global accept license silently && \
+    mkdir -p /opt/ibm/ace-11 && \
+    cp -r /tmp/ace-12.0.12.16/* /opt/ibm/ace-11
 
-# Set up ACE runtime and fix permissions
-RUN mkdir -p /home/aceuser/ace-server/configuration/policies/JDBCProviders && \
-    chown -R aceuser:aceuser /home/aceuser/ace-server
+# === User Setup ===
+RUN groupadd -r mqbrkrs && \
+    useradd -ms /bin/bash -g mqbrkrs aceuser && \
+    mkdir -p /var/mqsi && \
+    chown -R aceuser:mqbrkrs /var/mqsi /opt/ibm/ace-11 && \
+    chmod -R 770 /var/mqsi /opt/ibm/ace-11
 
-# Optional: Copy BAR files for deployment
-# COPY ./bars/myFlow.bar /home/aceuser/ace-server/run/
+# === Work Directory Setup ===
+RUN mkdir -p /home/aceuser/ace-server/{bars,configuration/policies/JDBCProviders,shared-classes}
 
-# Switch to aceuser
-USER aceuser
+# Copy BAR files
+COPY ./GeneratedBarFiles/*.bar /home/aceuser/ace-server/bars/
 
-# Set up ACE environment
+# Copy server configuration
+COPY ./config/server.conf.yaml /home/aceuser/ace-server/server.conf.yaml
+
+# Copy JDBC policy
+COPY ./policies/JDBCProviders/MySQLPolicy.policyxml /home/aceuser/ace-server/configuration/policies/JDBCProviders/
+
+# Copy JDBC driver
+COPY ./drivers/mysql-connector-j-9.4.0/mysql-connector-j-9.4.0.jar /home/aceuser/ace-server/shared-classes/
+
+# === ODBC Driver Setup ===
+COPY mysql-connector-odbc-9.4.0-linux-glibc2.28-x86-64bit /tmp/mysql-connector-odbc
+COPY ./odbcinst.ini /etc/odbcinst.ini
+RUN cp /tmp/mysql-connector-odbc/lib/libmyodbc9w.so /usr/lib/ && \
+    chmod 755 /usr/lib/libmyodbc9w.so && \
+    echo "/usr/lib" > /etc/ld.so.conf.d/usr_lib.conf && \
+    ldconfig
+
+# === Entrypoint ===
+COPY ./entrypoint.sh /home/aceuser/entrypoint.sh
+RUN chmod +x /home/aceuser/entrypoint.sh
+
+# Source ACE environment for aceuser
 RUN echo "source /opt/ibm/ace-11/server/bin/mqsiprofile" >> /home/aceuser/.bashrc
 
-# Expose ports for HTTP and MQ
+# Switch to non-root user
+USER aceuser
+WORKDIR /home/aceuser
+
+# Expose ports
 EXPOSE 7600 7800 1414
 
-# Start the integration server
-CMD ["/home/aceuser/ace-server/IntegrationServer"]
+ENTRYPOINT ["/home/aceuser/entrypoint.sh"]

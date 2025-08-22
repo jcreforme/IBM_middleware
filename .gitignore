@@ -1,0 +1,44 @@
+# IBM ACE
+/ace-12.0.12.16
+12.0.12.16-ACE-LINUX64-DEVELOPER.tar.gz
+mysql-connector-odbc-9.4.0-linux-glibc2.28-x86-64bit.tar.gz
+mysql-connector-odbc-9.4.0-linux-glibc2.28-x86-64bit
+unixODBC-2.3.12
+*.bar
+*.msgflow
+*.cmf
+generated/
+/GeneratedBarFiles
+/run
+
+# MQ
+*.mqsc
+
+# Build artifacts
+/target/
+/bin/
+/build/
+*.class
+*.jar
+*.war
+*.ear
+/lib/
+
+# Dependencies
+/node_modules/
+/vendor/
+
+# IDE and OS generated files
+.idea/
+.project
+.settings/
+*.log
+*.tmp
+*.swp
+thumbs.db
+ehthumbs.db
+*.DS_Store
+
+# Docker
+docker-compose.override.yml
+.env

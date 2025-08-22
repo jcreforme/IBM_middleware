@@ -9,20 +9,24 @@ server:
         channel: DEV.ADMIN.SVRCONN
       security:
         username: mqadmin
-        password: mqpassword  
+        password: mqpassword
   RestApi:
     port: 7800
-  Logging:
+  logging:
     console:
       logLevel: info
     file:
       enabled: true
       directory: /home/aceuser/ace-server/log
-      logLevel: info  
-  JDBCProviders:
-  MySQLProvider:
-    databaseName: mydb
-    type4DriverClassName: com.mysql.cj.jdbc.Driver
-    connectionUrlFormat: jdbc:mysql://mysql-db:3306/mydb
-    jarsURL: /home/aceuser/ace-server-data/shared-classes/mysql-connector-j-9.4.0.jar
-    
+      logLevel: info
+  resources:
+    JDBCProviders:
+      MySQLJDBC:
+        connectionUrlFormat: 'jdbc:mysql://{serverName}:{port}/{databaseName}'
+        connectionUrlFormatAttr:
+          serverName: 'mysql-db'
+          port: '3306'
+          databaseName: 'test'
+        databaseName: 'test'
+        jarsURL: '/home/aceuser/ace-server/shared-classes/mysql-connector-j-9.4.0.jar'
+        type4DriverClassName: 'com.mysql.cj.jdbc.Driver'
