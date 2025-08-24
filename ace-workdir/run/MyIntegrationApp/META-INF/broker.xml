@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Broker deployBarfile="MyIntegrationAppproject.generated.bar" deployTimestamp="2025-08-24 22:02:46">
+  <CompiledApplication>
+    <ConfigurableProperty uri="startMode">
+    </ConfigurableProperty>
+  </CompiledApplication>
+  <CompiledMessageFlow name="MainFlow" deployBarfile="MyIntegrationAppproject.generated.bar" deployTimestamp="2025-08-24 22:02:46">
+    <ConfigurableProperty uri="MainFlow#Compute.connectDatasourceBeforeFlowStarts">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#Compute.dataSource">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#Compute.validateMaster">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#HTTP Input.URLSpecifier" override="/myFlow">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#HTTP Input.decompressInputMessage">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#HTTP Input.faultFormat">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#HTTP Input.securityProfileName">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#HTTP Input.timeoutForClient">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#HTTP Input.useHTTPS">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#HTTP Input.validateMaster">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#HTTP Reply.compressionType">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#HTTP Reply.validateMaster">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#additionalInstances">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#commitCount">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#commitInterval">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#consumerPolicySet">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#consumerPolicySetBindings">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#coordinatedTransaction">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#maximumRateMsgsPerSec">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#monitoringProfile">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#notificationThresholdMsgsPerSec">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#processingTimeoutAction">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#processingTimeoutSec">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#providerPolicySet">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#providerPolicySetBindings">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#securityProfileName">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#startInstancesWhenFlowStarts">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#startMode">
+    </ConfigurableProperty>
+    <ConfigurableProperty uri="MainFlow#wlmPolicy">
+    </ConfigurableProperty>
+  </CompiledMessageFlow>
+</Broker>

@@ -9,9 +9,10 @@ services:
       - "7600:7600"
       - "7800:7800"
     volumes:
-      - /Users/jcarlo/IBM/ACET12/workspace/GeneratedBarFiles:/home/aceuser/ace-server/bars
-      - ./config/server.conf.yaml:/home/aceuser/ace-server/server.conf.yaml
+      - ./ace-workdir:/home/aceuser/ace-server
+      # - ./config/server.conf.yaml:/home/aceuser/ace-server/server.conf.yaml
       - ./drivers/mysql-connector-j-9.4.0/mysql-connector-j-9.4.0.jar:/home/aceuser/ace-server/shared-classes/mysql-connector-j-9.4.0.jar
+      - ./policies:/home/aceuser/ace-server/configuration/policies
     environment:
       ACE_SERVER_NAME: default
       LICENSE: accept

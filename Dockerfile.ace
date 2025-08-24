@@ -1,15 +1,24 @@
-# === Base: SLES15 with ACE ===
-FROM registry.suse.com/bci/bci-base:15.4
+# === Stage 1: ACE Installer ===
+FROM registry.suse.com/bci/bci-base:15.4 AS ace-builder
 
-# === Runtime Configuration ===
 USER root
 
-RUN echo "Installing zypper and basic utilities" && \
-    zypper --non-interactive install zypper coreutils
+RUN zypper --non-interactive install gzip tar
 
-# Install required packages with GPG checks disabled
-RUN echo "Installing required packages..." && \
-    zypper clean --all && \
+COPY 12.0.12.16-ACE-LINUX64-DEVELOPER.tar.gz /tmp/
+RUN tar -xzf /tmp/12.0.12.16-ACE-LINUX64-DEVELOPER.tar.gz -C /tmp && \
+    cd /tmp/ace-12.0.12.16 && \
+    ./ace make registry global accept license silently && \
+    mkdir -p /opt/ibm/ace-11 && \
+    cp -r /tmp/ace-12.0.12.16/* /opt/ibm/ace-11
+
+# === Stage 2: Runtime Image ===
+FROM registry.suse.com/bci/bci-base:15.4
+
+USER root
+
+# Install runtime dependencies
+RUN zypper clean --all && \
     zypper --no-gpg-checks --non-interactive refresh && \
     zypper --no-gpg-checks --non-interactive install \
         --force-resolution \
@@ -21,60 +30,65 @@ RUN echo "Installing required packages..." && \
         libXtst6 \
         libXi6 \
         unixODBC \
+        vim \
+        wget \
+        mariadb-connector-odbc \
         gawk && \
     zypper clean
 
-# === ACE Installation ===
-COPY 12.0.12.16-ACE-LINUX64-DEVELOPER.tar.gz /tmp/
-RUN chmod +r /tmp/12.0.12.16-ACE-LINUX64-DEVELOPER.tar.gz && \
-    tar -xzf /tmp/12.0.12.16-ACE-LINUX64-DEVELOPER.tar.gz -C /tmp && \
-    cd /tmp/ace-12.0.12.16 && \
-    ./ace make registry global accept license silently && \
-    mkdir -p /opt/ibm/ace-11 && \
-    cp -r /tmp/ace-12.0.12.16/* /opt/ibm/ace-11
+# Create user and group
+RUN getent group mqbrkrs || groupadd -r mqbrkrs && \
+    id -u aceuser &>/dev/null || useradd -ms /bin/bash -g mqbrkrs aceuser && \
+    mkdir -p /var/mqsi /home/aceuser && \
+    chown -R aceuser:mqbrkrs /var/mqsi /home/aceuser && \
+    chmod -R 770 /var/mqsi /home/aceuser
 
-# === User Setup ===
-RUN groupadd -r mqbrkrs && \
-    useradd -ms /bin/bash -g mqbrkrs aceuser && \
-    mkdir -p /var/mqsi && \
-    chown -R aceuser:mqbrkrs /var/mqsi /opt/ibm/ace-11 && \
-    chmod -R 770 /var/mqsi /opt/ibm/ace-11
+RUN mkdir -p /var/mqsi/common/errors
+RUN mkdir -p /var/mqsi/common/log
+RUN chown -R aceuser:mqbrkrs /var/mqsi
+RUN chmod -R 770 /var/mqsi
+
+
+# Copy ACE runtime from builder stage
+COPY --from=ace-builder /opt/ibm/ace-11 /opt/ibm/ace-11
+RUN chown -R aceuser:mqbrkrs /opt/ibm/ace-11 && \
+    chmod -R 770 /opt/ibm/ace-11
 
 # === Work Directory Setup ===
 RUN mkdir -p /home/aceuser/ace-server/{bars,configuration/policies/JDBCProviders,shared-classes}
 
-# Copy BAR files
 COPY ./GeneratedBarFiles/*.bar /home/aceuser/ace-server/bars/
-
-# Copy server configuration
-COPY ./config/server.conf.yaml /home/aceuser/ace-server/server.conf.yaml
-
-# Copy JDBC policy
+#∫COPY ./config/server.conf.yaml /home/aceuser/ace-server/server.conf.yaml
 COPY ./policies/JDBCProviders/MySQLPolicy.policyxml /home/aceuser/ace-server/configuration/policies/JDBCProviders/
-
-# Copy JDBC driver
 COPY ./drivers/mysql-connector-j-9.4.0/mysql-connector-j-9.4.0.jar /home/aceuser/ace-server/shared-classes/
+
+RUN chown -R aceuser:mqbrkrs /home/aceuser/ace-server && \
+    chmod -R 770 /home/aceuser/ace-server
 
 # === ODBC Driver Setup ===
 COPY mysql-connector-odbc-9.4.0-linux-glibc2.28-x86-64bit /tmp/mysql-connector-odbc
+RUN cp /tmp/mysql-connector-odbc/lib/libmyodbc9a.so /usr/lib
+RUN cp /tmp/mysql-connector-odbc/lib/libmyodbc9w.so /usr/lib
+
 COPY ./odbcinst.ini /etc/odbcinst.ini
+COPY ./odb.ini /etc/odb.ini
 RUN cp /tmp/mysql-connector-odbc/lib/libmyodbc9w.so /usr/lib/ && \
     chmod 755 /usr/lib/libmyodbc9w.so && \
     echo "/usr/lib" > /etc/ld.so.conf.d/usr_lib.conf && \
     ldconfig
 
-# === Entrypoint ===
+# Entrypoint
 COPY ./entrypoint.sh /home/aceuser/entrypoint.sh
-RUN chmod +x /home/aceuser/entrypoint.sh
+RUN chmod +x /home/aceuser/entrypoint.sh && \
+    echo "source /opt/ibm/ace-11/server/bin/mqsiprofile" >> /home/aceuser/.bashrc
 
-# Source ACE environment for aceuser
-RUN echo "source /opt/ibm/ace-11/server/bin/mqsiprofile" >> /home/aceuser/.bashrc
-
-# Switch to non-root user
 USER aceuser
 WORKDIR /home/aceuser
 
-# Expose ports
+# Set environment variables
+ENV ODBCINI=/etc/odbc.ini
+ENV ODBCSYSINI=/etc
+
 EXPOSE 7600 7800 1414
 
 ENTRYPOINT ["/home/aceuser/entrypoint.sh"]

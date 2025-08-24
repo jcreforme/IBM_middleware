@@ -1,0 +1,7 @@
+
+====== Starting plaintext trace (process ID 1 - integration_server.ace-server) ======
+=== Build ib1200-L250710.10292 (S1200-L250701.10517) - IBM App Connect Enterprise 12.0.12.16 ===
+=== Platform Linux / x86_64 / 5.10.47-linuxkit ===
+=== Timestamps are formatted in local time, which is GMT ===
+=== Time now 2025-08-24 22:00:51.565372 ===
+

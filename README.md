@@ -165,6 +165,7 @@ brew install mysql-client --verbose
 
 brew list mysql-client
 
+mqsireportdbparms -w /home/aceuser/ace-server
 
 
 docker cp odbc.ini ace-container:/etc/odbc.ini
@@ -176,18 +177,27 @@ cat /etc/os-release
 https://www.ibm.com/resources/mrs/assets/DownloadList?source=swg-wmbfd&lang=en_US
 
 
+### ACE CONTANER RESTART
 docker stop ace-container
 docker rm -f ace-container
-
-Rebuild the Docker image:
 docker build -t ace-container -f Dockerfile.ace .
+docker run --name ace-container -p 7600:7600 -p 7800:7800 -d ace-container
 
-Run the container:
-docker run --name ace-container -d ace-container
-docker run --name ace-container -u aceuser -d ace-container
 
 docker exec -u 0 -it ace-container bash
 
+
+### ACE Server restart
+kill -9 $(pgrep IntegrationServer)
+rm -f /home/aceuser/ace-server/config/components/integration_server/servers/*/.lock
+rm -rf /home/aceuser/ace-server/run/*
+exec /opt/ibm/ace-11/server/bin/IntegrationServer --work-dir /home/aceuser/ace-server/
+
+
+### Check DB connector
+export ODBCINI=/etc/odbc.ini
+export ODBCSYSINI=/etc
+mqsicvp -n MySQLDatabaseCredentials -u root -p root
 
 
 /home/aceuser/ace-server/
