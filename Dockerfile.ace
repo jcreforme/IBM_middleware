@@ -71,7 +71,7 @@ RUN cp /tmp/mysql-connector-odbc/lib/libmyodbc9a.so /usr/lib
 RUN cp /tmp/mysql-connector-odbc/lib/libmyodbc9w.so /usr/lib
 
 COPY ./odbcinst.ini /etc/odbcinst.ini
-COPY ./odb.ini /etc/odb.ini
+COPY ./odbc.ini /etc/odbc.ini
 RUN cp /tmp/mysql-connector-odbc/lib/libmyodbc9w.so /usr/lib/ && \
     chmod 755 /usr/lib/libmyodbc9w.so && \
     echo "/usr/lib" > /etc/ld.so.conf.d/usr_lib.conf && \

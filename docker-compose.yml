@@ -93,7 +93,7 @@ services:
     restart: unless-stopped
 
   mysql:
-    image: mysql:latest
+    image: mysql:8.0.36
     container_name: mysql-db
     ports:
       - "3306:3306"
@@ -103,7 +103,9 @@ services:
       MYSQL_USER: aceuser
       MYSQL_PASSWORD: acepass
     volumes:
-      - mysql-data:/var/lib/mysql
+      - ./mysql-data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/custom.cnf
+      - ./mysql/init-users.sql:/docker-entrypoint-initdb.d/init-users.sql
     networks:
       - ace-mq-network
     restart: unless-stopped

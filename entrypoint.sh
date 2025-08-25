@@ -3,7 +3,9 @@
 echo "🔧 Sourcing ACE environment..."
 source /opt/ibm/ace-11/server/bin/mqsiprofile 
 
-echo "source /opt/ibm/ace-11/server/bin/mqsiprofile" >> ~/.bashrc
+echo 'export ODBCINI=/etc/odbc.ini' >> ~/.bashrc
+echo 'export ODBCSYSINI=/etc' >> ~/.bashrc
+
 
 echo "📦 Display Groups..."
 groups aceuser

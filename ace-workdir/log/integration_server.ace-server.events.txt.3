@@ -1,0 +1,10 @@
+2025-08-24 23:34:05.429207Z: [Thread 1] (Msg 1/1) BIP1990I: Integration server 'ace-server' starting initialization; version '12.0.12.16' (64-bit) 
+2025-08-24 23:34:05.772801Z: [Thread 1] (Msg 1/1) BIP9905I: Initializing resource managers. 
+2025-08-24 23:34:12.947702Z: [Thread 1] (Msg 1/1) BIP10112I: The resources from 'mqsicdc.par' have not been loaded because the runtime component 'ChangeDataCapture' has not been enabled. Reason: 'Restricted by Java Runtime selected'. Further detail: '/opt/ibm/ace-11/common/jdk/jre/embedded.java.yaml'. 
+2025-08-24 23:34:17.552222Z: [Thread 1] (Msg 1/1) BIP10112I: The resources from 'imbopentelemetry.lil' have not been loaded because the runtime component 'OpenTelemetry' has not been enabled. Reason: 'Integration Server Configuration'. Further detail: 'server.conf.yaml'. 
+2025-08-24 23:35:11.432916Z: [Thread 1] (Msg 1/4) BIP3843E: Failed to setup any Connector. 
+2025-08-24 23:35:11.436527Z: [Thread 1] (Msg 2/4) BIP3850E: Unexpected java exception thrown from the Connector method 'Connector::initialize'. 
+2025-08-24 23:35:11.439946Z: [Thread 1] (Msg 3/4) BIP4395E: Java exception: 'java.lang.ClassCastException'; thrown from class name: 'com.ibm.broker.connector.kafka.KafkaConnectorFactory', method name: 'initLogging', file: 'KafkaConnectorFactory.java', line: '99' 
+2025-08-24 23:35:11.442929Z: [Thread 1] (Msg 4/4) BIP4367E: The method 'initLogging' in Java node 'unknown' has thrown the following exception: java.lang.ClassCastException: org.apache.logging.log4j.simple.SimpleLoggerContext incompatible with org.apache.logging.log4j.core.LoggerContext
+com.ibm.broker.connector.kafka.KafkaConnectorFactory.initLogging(KafkaConnectorFactory.java:99)
+com.ibm.broker.connector.kafka.KafkaConnectorFactory.initialize(KafkaConnectorFactory.java:87). 

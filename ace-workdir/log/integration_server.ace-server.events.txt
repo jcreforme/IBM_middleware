@@ -1,39 +1,36 @@
-2025-08-24 22:00:51.654820Z: [Thread 1] (Msg 1/1) BIP1990I: Integration server 'ace-server' starting initialization; version '12.0.12.16' (64-bit) 
-2025-08-24 22:00:51.962088Z: [Thread 1] (Msg 1/1) BIP9905I: Initializing resource managers. 
-2025-08-24 22:00:57.340128Z: [Thread 1] (Msg 1/1) BIP10112I: The resources from 'mqsicdc.par' have not been loaded because the runtime component 'ChangeDataCapture' has not been enabled. Reason: 'Restricted by Java Runtime selected'. Further detail: '/opt/ibm/ace-11/common/jdk/jre/embedded.java.yaml'. 
-2025-08-24 22:01:01.978947Z: [Thread 1] (Msg 1/1) BIP10112I: The resources from 'imbopentelemetry.lil' have not been loaded because the runtime component 'OpenTelemetry' has not been enabled. Reason: 'Integration Server Configuration'. Further detail: 'server.conf.yaml'. 
-2025-08-24 22:01:40.231204Z: [Thread 1] (Msg 1/1) BIP9906I: Reading deployed resources. 
-2025-08-24 22:01:50.132920Z: [Thread 86] (Msg 1/1) BIP2866I: IBM App Connect Enterprise administration security is inactive. 
-2025-08-24 22:01:50.289032Z: [Thread 86] (Msg 1/1) BIP3132I: The HTTP Listener has started listening on port '7600' for 'RestAdmin http' connections. 
-2025-08-24 22:01:50.357908Z: [Thread 1] (Msg 1/1) BIP1991I: Integration server has finished initialization. 
-2025-08-24 22:02:38.862848Z: [Thread 22] (Msg 1/1) BIP2152I: Configuration message received. 
-2025-08-24 22:02:39.232336Z: [Thread 22] (Msg 1/1) BIP9332I: PolicyProject 'MySQLPolicy' has been created successfully. 
-2025-08-24 22:02:39.237248Z: [Thread 22] (Msg 1/1) BIP9326I: The source 'MySQLPolicyproject.generated.bar' has been successfully deployed. 
-2025-08-24 22:02:39.248820Z: [Thread 22] (Msg 1/1) BIP2154I: Integration server finished with Configuration message. 
-2025-08-24 22:02:46.175684Z: [Thread 23] (Msg 1/1) BIP2152I: Configuration message received. 
-2025-08-24 22:02:46.704092Z: [Thread 23] (Msg 1/1) BIP2155I: About to 'Initialize' the deployed resource 'MyIntegrationApp' of type 'Application'. 
-2025-08-24 22:02:49.738356Z: [Thread 23] (Msg 1/1) BIP2155I: About to 'Start' the deployed resource 'MyIntegrationApp' of type 'Application'. 
-2025-08-24 22:02:49.783464Z: [Thread 23] (Msg 1/1) BIP3132I: The HTTP Listener has started listening on port '7800' for 'http' connections. 
-2025-08-24 22:02:49.798440Z: [Thread 23] (Msg 1/1) BIP1996I: Listening on HTTP URL '/myFlow'. 
-2025-08-24 22:02:49.822444Z: [Thread 23] (Msg 1/1) BIP2269I: Deployed resource 'MainFlow' (uuid='MainFlow',type='MessageFlow') started successfully. 
-2025-08-24 22:02:49.833692Z: [Thread 23] (Msg 1/1) BIP9332I: Application 'MyIntegrationApp' has been created successfully. 
-2025-08-24 22:02:49.835736Z: [Thread 23] (Msg 1/1) BIP9326I: The source 'MyIntegrationAppproject.generated.bar' has been successfully deployed. 
-2025-08-24 22:02:49.856408Z: [Thread 23] (Msg 1/1) BIP2154I: Integration server finished with Configuration message. 
-2025-08-24 22:03:05.919510Z: [Thread 107] (Msg 1/4) BIP3120E: Exception condition detected on input node 'MainFlow.HTTP Input'. 
-2025-08-24 22:03:05.921866Z: [Thread 107] (Msg 2/4) BIP2230E: Error detected whilst processing a message in node 'MainFlow.Compute'. 
-2025-08-24 22:03:05.925475Z: [Thread 107] (Msg 3/4) BIP2488E:  (.MainFlow_Compute.Main, 15.5) Error detected whilst executing the SQL statement 'SET sqlResult = DEFAULTPASSTHRU(sqlStmt, connName);'. 
-2025-08-24 22:03:05.927343Z: [Thread 107] (Msg 4/4) BIP2112E: IBM App Connect Enterprise internal error: diagnostic information 'Unable to search for empty name', 'odbc'. 
-2025-08-24 22:04:12.992126Z: [Thread 107] (Msg 1/4) BIP3120E: Exception condition detected on input node 'MainFlow.HTTP Input'. 
-2025-08-24 22:04:12.994464Z: [Thread 107] (Msg 2/4) BIP2230E: Error detected whilst processing a message in node 'MainFlow.Compute'. 
-2025-08-24 22:04:13.000813Z: [Thread 107] (Msg 3/4) BIP2488E:  (.MainFlow_Compute.Main, 15.5) Error detected whilst executing the SQL statement 'SET sqlResult = DEFAULTPASSTHRU(sqlStmt, connName);'. 
-2025-08-24 22:04:13.002960Z: [Thread 107] (Msg 4/4) BIP2112E: IBM App Connect Enterprise internal error: diagnostic information 'Unable to search for empty name', 'odbc'. 
-2025-08-24 22:07:12.857287Z: [Thread 107] (Msg 1/4) BIP3120E: Exception condition detected on input node 'MainFlow.HTTP Input'. 
-2025-08-24 22:07:12.859536Z: [Thread 107] (Msg 2/4) BIP2230E: Error detected whilst processing a message in node 'MainFlow.Compute'. 
-2025-08-24 22:07:12.862182Z: [Thread 107] (Msg 3/4) BIP2488E:  (.MainFlow_Compute.Main, 15.5) Error detected whilst executing the SQL statement 'SET sqlResult = DEFAULTPASSTHRU(sqlStmt, connName);'. 
-2025-08-24 22:07:12.864332Z: [Thread 107] (Msg 4/4) BIP2112E: IBM App Connect Enterprise internal error: diagnostic information 'Unable to search for empty name', 'odbc'. 
-2025-08-24 22:08:59.123456Z: [Thread 1] (Msg 1/1) BIP1989I: Integration server is terminating due to a shutdown event. 
-2025-08-24 22:08:59.224484Z: [Thread 1] (Msg 1/1) BIP2155I: About to 'Stop' the deployed resource 'MyIntegrationApp' of type 'Application'. 
-2025-08-24 22:09:03.890382Z: [Thread 1] (Msg 1/1) BIP2271I: Deployed resource 'MainFlow' (uuid='MainFlow',type='MessageFlow') successfully stopped. 
-2025-08-24 22:09:03.960593Z: [Thread 1] (Msg 1/1) BIP2155I: About to 'TearDown' the deployed resource 'MyIntegrationApp' of type 'Application'. 
-2025-08-24 22:09:03.982389Z: [Thread 1] (Msg 1/1) BIP3133I: The HTTP Listener has stopped listening on port '7800' for 'http' connections. 
-2025-08-24 22:09:06.992729Z: [Thread 1] (Msg 1/1) BIP1992I: Integration server 'ace-server' stopped. 
+2025-08-25 00:03:24.881842Z: [Thread 1] (Msg 1/1) BIP1990I: Integration server 'ace-server' starting initialization; version '12.0.12.16' (64-bit) 
+2025-08-25 00:03:25.235646Z: [Thread 1] (Msg 1/1) BIP9905I: Initializing resource managers. 
+2025-08-25 00:03:38.615488Z: [Thread 1] (Msg 1/1) BIP10112I: The resources from 'mqsicdc.par' have not been loaded because the runtime component 'ChangeDataCapture' has not been enabled. Reason: 'Restricted by Java Runtime selected'. Further detail: '/opt/ibm/ace-11/common/jdk/jre/embedded.java.yaml'. 
+2025-08-25 00:03:47.485816Z: [Thread 1] (Msg 1/1) BIP10112I: The resources from 'imbopentelemetry.lil' have not been loaded because the runtime component 'OpenTelemetry' has not been enabled. Reason: 'Integration Server Configuration'. Further detail: 'server.conf.yaml'. 
+2025-08-25 00:04:48.731220Z: [Thread 1] (Msg 1/1) BIP9906I: Reading deployed resources. 
+2025-08-25 00:04:48.841436Z: [Thread 1] (Msg 1/1) BIP9907I: Initializing deployed resources. 
+2025-08-25 00:04:48.864928Z: [Thread 1] (Msg 1/1) BIP2155I: About to 'Initialize' the deployed resource 'MyIntegrationApp' of type 'Application'. 
+2025-08-25 00:04:50.987908Z: [Thread 1] (Msg 1/1) BIP9332I: PolicyProject 'MySQLPolicy' has been reloaded successfully. 
+2025-08-25 00:04:50.990912Z: [Thread 1] (Msg 1/1) BIP2155I: About to 'Start' the deployed resource 'MyIntegrationApp' of type 'Application'. 
+2025-08-25 00:04:51.018204Z: [Thread 1] (Msg 1/1) BIP3132I: The HTTP Listener has started listening on port '7800' for 'http' connections. 
+2025-08-25 00:04:51.022504Z: [Thread 1] (Msg 1/1) BIP1996I: Listening on HTTP URL '/myFlow'. 
+2025-08-25 00:04:51.025584Z: [Thread 1] (Msg 1/1) BIP2269I: Deployed resource 'MainFlow' (uuid='MainFlow',type='MessageFlow') started successfully. 
+2025-08-25 00:04:51.028212Z: [Thread 1] (Msg 1/1) BIP9332I: Application 'MyIntegrationApp' has been reloaded successfully. 
+2025-08-25 00:04:59.100448Z: [Thread 142] (Msg 1/1) BIP2866I: IBM App Connect Enterprise administration security is inactive. 
+2025-08-25 00:04:59.270856Z: [Thread 142] (Msg 1/1) BIP3132I: The HTTP Listener has started listening on port '7600' for 'RestAdmin http' connections. 
+2025-08-25 00:04:59.335232Z: [Thread 1] (Msg 1/1) BIP1991I: Integration server has finished initialization. 
+2025-08-25 00:15:16.636955Z: [Thread 207] (Msg 1/4) BIP3120E: Exception condition detected on input node 'MainFlow.HTTP Input'. 
+2025-08-25 00:15:16.638865Z: [Thread 207] (Msg 2/4) BIP2230E: Error detected whilst processing a message in node 'MainFlow.Compute'. 
+2025-08-25 00:15:16.640518Z: [Thread 207] (Msg 3/4) BIP2488E:  (.MainFlow_Compute.Main, 15.5) Error detected whilst executing the SQL statement 'SET sqlResult = DEFAULTPASSTHRU(sqlStmt, connName);'. 
+2025-08-25 00:15:16.642212Z: [Thread 207] (Msg 4/4) BIP2112E: IBM App Connect Enterprise internal error: diagnostic information 'Unable to search for empty name', 'odbc'. 
+2025-08-25 00:15:17.694570Z: [Thread 207] (Msg 1/4) BIP3120E: Exception condition detected on input node 'MainFlow.HTTP Input'. 
+2025-08-25 00:15:17.702724Z: [Thread 207] (Msg 2/4) BIP2230E: Error detected whilst processing a message in node 'MainFlow.Compute'. 
+2025-08-25 00:15:17.706942Z: [Thread 207] (Msg 3/4) BIP2488E:  (.MainFlow_Compute.Main, 15.5) Error detected whilst executing the SQL statement 'SET sqlResult = DEFAULTPASSTHRU(sqlStmt, connName);'. 
+2025-08-25 00:15:17.715078Z: [Thread 207] (Msg 4/4) BIP2112E: IBM App Connect Enterprise internal error: diagnostic information 'Unable to search for empty name', 'odbc'. 
+2025-08-25 00:15:49.576008Z: [Thread 207] (Msg 1/4) BIP3120E: Exception condition detected on input node 'MainFlow.HTTP Input'. 
+2025-08-25 00:15:49.578640Z: [Thread 207] (Msg 2/4) BIP2230E: Error detected whilst processing a message in node 'MainFlow.Compute'. 
+2025-08-25 00:15:49.579812Z: [Thread 207] (Msg 3/4) BIP2488E:  (.MainFlow_Compute.Main, 15.5) Error detected whilst executing the SQL statement 'SET sqlResult = DEFAULTPASSTHRU(sqlStmt, connName);'. 
+2025-08-25 00:15:49.581052Z: [Thread 207] (Msg 4/4) BIP2112E: IBM App Connect Enterprise internal error: diagnostic information 'Unable to search for empty name', 'odbc'. 
+2025-08-25 00:15:51.397628Z: [Thread 207] (Msg 1/4) BIP3120E: Exception condition detected on input node 'MainFlow.HTTP Input'. 
+2025-08-25 00:15:51.399212Z: [Thread 207] (Msg 2/4) BIP2230E: Error detected whilst processing a message in node 'MainFlow.Compute'. 
+2025-08-25 00:15:51.401372Z: [Thread 207] (Msg 3/4) BIP2488E:  (.MainFlow_Compute.Main, 15.5) Error detected whilst executing the SQL statement 'SET sqlResult = DEFAULTPASSTHRU(sqlStmt, connName);'. 
+2025-08-25 00:15:51.415692Z: [Thread 207] (Msg 4/4) BIP2112E: IBM App Connect Enterprise internal error: diagnostic information 'Unable to search for empty name', 'odbc'. 
+2025-08-25 00:29:31.173962Z: [Thread 207] (Msg 1/4) BIP3120E: Exception condition detected on input node 'MainFlow.HTTP Input'. 
+2025-08-25 00:29:31.179498Z: [Thread 207] (Msg 2/4) BIP2230E: Error detected whilst processing a message in node 'MainFlow.Compute'. 
+2025-08-25 00:29:31.195090Z: [Thread 207] (Msg 3/4) BIP2488E:  (.MainFlow_Compute.Main, 15.5) Error detected whilst executing the SQL statement 'SET sqlResult = DEFAULTPASSTHRU(sqlStmt, connName);'. 
+2025-08-25 00:29:31.204940Z: [Thread 207] (Msg 4/4) BIP2112E: IBM App Connect Enterprise internal error: diagnostic information 'Unable to search for empty name', 'odbc'. 

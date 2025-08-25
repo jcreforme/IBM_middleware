@@ -176,6 +176,9 @@ cat /etc/os-release
 
 https://www.ibm.com/resources/mrs/assets/DownloadList?source=swg-wmbfd&lang=en_US
 
+## Restart ALL
+docker compose down -v
+docker compose up -d --build
 
 ### ACE CONTANER RESTART
 docker stop ace-container
@@ -198,6 +201,21 @@ exec /opt/ibm/ace-11/server/bin/IntegrationServer --work-dir /home/aceuser/ace-s
 export ODBCINI=/etc/odbc.ini
 export ODBCSYSINI=/etc
 mqsicvp -n MySQLDatabaseCredentials -u root -p root
+
+
+## Database configuration
+bash
+docker exec -it mysql-db mysql -u root -p
+Then in the MySQL shell:
+
+sql
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'root';
+FLUSH PRIVILEGES;
+If you're using aceuser for your flows, also run:
+
+sql
+ALTER USER 'aceuser'@'%' IDENTIFIED WITH mysql_native_password BY 'acepass';
+FLUSH PRIVILEGES;
 
 
 /home/aceuser/ace-server/
